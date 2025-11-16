@@ -20,21 +20,21 @@ void	x_breswnham(float *x, float *y, bool is_x_breswnham)
 		*y += 1;
 }
 
-static void	draw_line(float x, float y, float x1, float y1, t_fdf *data)
+static void	draw_line(float p0[2], float p1[2], t_fdf *data)
 {
 	float	x_step;
 	float	y_step;
 	int		max_;
 
-	max_ = max(mod((x1 - x)), mod((y1 - y)));
-	x_step = (x1 - x) / max_;
-	y_step = (y1 - y) / max_;
-	while ((int)(x - x1) || (int)(y - y1))
+	max_ = max(mod((p1[0] - p0[0])), mod((p1[1] - p0[1])));
+	x_step = (p1[0] - p0[0]) / max_;
+	y_step = (p1[1] - p0[1]) / max_;
+	while ((int)(p0[0] - p1[0]) || (int)(p0[1] - p1[1]))
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr,
-			(int)x, (int)y, data->color);
-		x += x_step;
-		y += y_step;
+			(int)p0[0], (int)p0[1], data->color);
+		p0[0] += x_step;
+		p0[1] += y_step;
 	}
 }
 
@@ -56,7 +56,7 @@ void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data)
 	isometric(&x, &y, (float)z0);
 	isometric(&x1, &y1, (float)z1);
 	offset_coordinate(&x, &y, &x1, &y1);
-	draw_line(x, y, x1, y1, data);
+	draw_line((float [2]){x, y}, (float [2]){x1, y1}, data);
 }
 
 void	draw_map(t_fdf *data)
