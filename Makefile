@@ -6,14 +6,12 @@ SRCS		=	main.c \
 				read_file.c \
 				matrix.c \
 				transform.c \
-				utils.c \
-				get_next_line/get_next_line.c \
-				get_next_line/get_next_line_utils.c
+				utils.c
 OBJS		=	$(SRCS:.c=.o)
 
 # Compiler / Flags
 CC			=	cc
-CFLAGS		+=	-Wall -Wextra -Werror -I get_next_line -I libft
+CFLAGS		+=	-Wall -Wextra -Werror -I libft
 
 # Libraries
 LIBX_FLAGS	=	-L. -lmlx_Linux -lXext -lX11

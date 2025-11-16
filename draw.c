@@ -6,7 +6,7 @@
 /*   By: skeita <skeita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 11:25:03 by skeita            #+#    #+#             */
-/*   Updated: 2025/11/16 12:11:25 by skeita           ###   ########.fr       */
+/*   Updated: 2025/11/16 12:57:03 by skeita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@ void	x_breswnham(float *x, float *y, bool is_x_breswnham)
 		*x += 1;
 	else
 		*y += 1;
-}
-
-void	set_color(int z, t_fdf *data)
-{
-	if (z)
-		data->color = 0xe80c0c;
-	else
-		data->color = 0xffffff;
 }
 
 static void	draw_line(float x, float y, float x1, float y1, t_fdf *data)

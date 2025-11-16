@@ -6,14 +6,14 @@
 /*   By: skeita <skeita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 11:06:56 by skeita            #+#    #+#             */
-/*   Updated: 2025/11/16 12:01:52 by skeita           ###   ########.fr       */
+/*   Updated: 2025/11/16 12:55:18 by skeita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "get_next_line/get_next_line.h"
+# include "get_next_line.h"
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <fcntl.h>	

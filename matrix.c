@@ -6,7 +6,7 @@
 /*   By: skeita <skeita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 11:14:17 by skeita            #+#    #+#             */
-/*   Updated: 2025/11/16 11:59:15 by skeita           ###   ########.fr       */
+/*   Updated: 2025/11/16 12:40:26 by skeita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,10 @@ void	free_matrix(t_fdf *data, int i)
 	data->height = 0;
 }
 
+void	set_color(int z, t_fdf *data)
+{
+	if (z)
+		data->color = 0xe80c0c;
+	else
+		data->color = 0xffffff;
+}
