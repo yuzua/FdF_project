@@ -10,11 +10,11 @@
 #define SUCCESS 0
 #define OPEN_ERROR -1
 
-int get_height(char *file_name)
+int	get_height(char *file_name)
 {
-	char *line;
-	int fd;
-	int height;
+	char	*line;
+	int		fd;
+	int		height;
 
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd == -1)
@@ -29,28 +29,28 @@ int get_height(char *file_name)
 	return (height);
 }
 
-int word_count(const char *s, char c) {
-    char	**t;
+int	word_count(const char *s, char c)
+{
+	char	**t;
 	int		n;
-	
+
 	t = ft_split(s, c);
-    n = 0;
+	n = 0;
 	while (t && t[n])
 	{
 		free(t[n]);
 		n++;
 	}
-    free(t);
-    return (n);
+	free(t);
+	return (n);
 }
 
-int get_width(char *file_name)
+int	get_width(char *file_name)
 {
-	char * line;
-	int fd;
-	int width;
-	
-	
+	char	*line;
+	int		fd;
+	int		width;
+
 	fd = open(file_name, O_RDONLY, 0);
 	if (fd == -1)
 		return (OPEN_ERROR);
@@ -68,14 +68,14 @@ int get_width(char *file_name)
 	return (width);
 }
 
-void file_matrix(int *z_matrix, char *line)
+void	file_matrix(int *z_matrix, char *line)
 {
-	char **split;
-	int i;
-	
+	char	*split;
+	int		i;
+
 	split = ft_split(line, ' ');
 	if (split == NULL)
-		return;
+		return ;
 	i = 0;
 	while (split[i])
 	{
@@ -86,9 +86,9 @@ void file_matrix(int *z_matrix, char *line)
 	free(split);
 }
 
-int set_matrix(char *file_name, t_fdf *data)
+int	set_matrix(char *file_name, t_fdf *data)
 {
-	int i;
+	int	i;
 
 	if (file_name == NULL || data == NULL)
 		return (ERROR);
@@ -114,7 +114,7 @@ int set_matrix(char *file_name, t_fdf *data)
 	return (i);
 }
 
-void free_matrix(t_fdf *data, int i)
+void	free_matrix(t_fdf *data, int i)
 {
 	while (i > 0)
 		free(data->z_matrix[--i]);
@@ -123,11 +123,11 @@ void free_matrix(t_fdf *data, int i)
 	data->height = 0;
 }
 
-int read_file_matrix(char *file_name, t_fdf *data)
+int	read_file_matrix(char *file_name, t_fdf *data)
 {
-	int fd;
-	char *line;
-	int i;
+	int		fd;
+	char	*line;
+	int		i;
 
 	if (file_name == NULL || data == NULL)
 		return (ERROR);
@@ -135,7 +135,8 @@ int read_file_matrix(char *file_name, t_fdf *data)
 	if (i == ERROR)
 		return (ERROR);
 	fd = open(file_name, O_RDONLY, 0);
-	if (fd == -1){
+	if (fd == -1)
+	{
 		free_matrix(data, i);
 		return (ERROR);
 	}

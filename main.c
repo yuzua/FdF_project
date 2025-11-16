@@ -5,16 +5,17 @@
 #include "mlx.h"
 #include "fdf.h"
 
-# define LINUX_ESC_KEY 0xff1b
-# define MACOS_ESC_KEY 53
-# define WINDOWS_ESC_KEY 0x1B
-# define CLOSE_BUTTON 17
-# define ERROR -1
-# define SUCCESS 0
+#define LINUX_ESC_KEY 0xff1b
+#define MACOS_ESC_KEY 53
+#define WINDOWS_ESC_KEY 0x1B
+#define CLOSE_BUTTON 17
+#define ERROR -1
+#define SUCCESS 0
 
 int	close_key_handler(int keycode, t_fdf *data)
 {
-	if (keycode != LINUX_ESC_KEY && keycode != MACOS_ESC_KEY && keycode != WINDOWS_ESC_KEY)
+	if (keycode != LINUX_ESC_KEY && keycode != MACOS_ESC_KEY
+		&& keycode != WINDOWS_ESC_KEY)
 		return (0);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
@@ -24,16 +25,18 @@ int	close_key_handler(int keycode, t_fdf *data)
 
 int	close_handler(void *param)
 {
+	t_fdf	*data;
+
 	if (param == NULL)
 		return (0);
-	t_fdf *data = (t_fdf *)param;
+	data = (t_fdf *)param;
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free_data(data);
 	exit(0);
 }
 
-int set_data(t_fdf *data, char *file_name)
+int	set_data(t_fdf *data, char *file_name)
 {
 	if (data == NULL || file_name == NULL)
 		return (ERROR);
@@ -43,13 +46,15 @@ int set_data(t_fdf *data, char *file_name)
 		return (ERROR);
 	}
 	data->mlx_ptr = mlx_init();
-	if (data->mlx_ptr == NULL){
+	if (data->mlx_ptr == NULL)
+	{
 		mlx_destroy_display(data->mlx_ptr);
 		free_data(data);
 		return (ERROR);
 	}
 	data->win_ptr = mlx_new_window(data->mlx_ptr, 1920, 1080, "FDF");
-	if (data->win_ptr == NULL){
+	if (data->win_ptr == NULL)
+	{
 		free_data(data);
 		return (ERROR);
 	}
@@ -57,10 +62,10 @@ int set_data(t_fdf *data, char *file_name)
 	return (SUCCESS);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_fdf *data;
-	int fd;
+	t_fdf	*data;
+	int		fd;
 
 	if (argc != 2)
 		return (0);
@@ -80,12 +85,12 @@ int main(int argc, char **argv)
 	return (0);
 }
 
-void free_data(t_fdf *data)
+void	free_data(t_fdf *data)
 {
-	int i;
+	int	i;
 
 	if (data == NULL)
-		return;
+		return ;
 	i = 0;
 	while (i < data->height)
 		free(data->z_matrix[i++]);
