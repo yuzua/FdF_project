@@ -1,39 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skeita <skeita@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 11:25:03 by skeita            #+#    #+#             */
+/*   Updated: 2025/11/16 12:11:25 by skeita           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
-#include "mlx.h"
-#include <math.h>
-
-#define MAX(a, b) ((a > b) ? a : b)
-#define MOD(a) ((a < 0 )? -a : a)
-
-// float mod(float a)
-// {
-//     return ((a < 0 )? -a : a);
-// }
-
-void	isometric(float *x, float *y, float z)
-{
-	float	prev_x;
-	float	prev_y;
-
-	prev_x = *x;
-	prev_y = *y;
-	*x = (prev_x - prev_y) * cos(M_PI / 6);
-	*y = (prev_x + prev_y) * sin(M_PI / 6) - z;
-}
-
-void	zoom_coodinate(float *a, float *b, int zoom)
-{
-	*x *= zoom;
-	*y *= zoom;
-}
-
-void	xxx_coodinate(float *x, float *y, float *x1, float *y1)
-{
-	*x += 150;
-	*y += 150;
-	*x1 += 150;
-	*y1 += 150;
-}
 
 void	x_breswnham(float *x, float *y, bool is_x_breswnham)
 {
@@ -51,17 +28,11 @@ void	set_color(float x, float y, t_fdf *data)
 		data->color = 0xffffff;
 }
 
-void	advance_step(float *x, float *y, float x_step, float y_step)
-{
-	*x += x_step;
-	*y += y_step;
-}
-
 void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data)
 {
 	float	x_step;
 	float	y_step;
-	int		max;
+	int		max_;
 	float	x1;
 	float	y1;
 
@@ -73,10 +44,10 @@ void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data)
 	set_color(x, y, data);
 	isometric(&x, &y, data->z_matrix[(int)y][(int)x]);
 	isometric(&x1, &y1, data->z_matrix[(int)y1][(int)x1]);
-	xxx_coodinate(&x, &y, &x1, &y1);
-	max = MAX(MOD((x1 - x)), MOD((y1 - y)));
-	x_step = (x1 - x) / max;
-	y_step = (y1 - y) / max;
+	offset_coordinate(&x, &y, &x1, &y1);
+	max_ = max(mod((x1 - x)), mod((y1 - y)));
+	x_step = (x1 - x) / max_;
+	y_step = (y1 - y) / max_;
 	while ((int)(x - x1) || (int)(y - y1))
 	{
 		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);

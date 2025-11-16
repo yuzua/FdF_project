@@ -1,16 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
-#include "mlx.h"
-#include "fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skeita <skeita@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 11:06:44 by skeita            #+#    #+#             */
+/*   Updated: 2025/11/16 12:11:47 by skeita           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define LINUX_ESC_KEY 0xff1b
-#define MACOS_ESC_KEY 53
-#define WINDOWS_ESC_KEY 0x1B
-#define CLOSE_BUTTON 17
-#define ERROR -1
-#define SUCCESS 0
+#include "fdf.h"
 
 int	close_key_handler(int keycode, t_fdf *data)
 {

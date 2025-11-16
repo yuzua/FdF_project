@@ -4,6 +4,9 @@ NAME		=	fdf
 SRCS		=	main.c \
 				draw.c \
 				read_file.c \
+				matrix.c \
+				transform.c \
+				utils.c \
 				get_next_line/get_next_line.c \
 				get_next_line/get_next_line_utils.c
 OBJS		=	$(SRCS:.c=.o)
