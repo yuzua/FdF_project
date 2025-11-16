@@ -63,7 +63,7 @@ float	max(float a, float b);
 void	advance_step(float *x, float *y, float x_step, float y_step);
 
 void	x_breswnham(float *x, float *y, bool is_x_breswnham);
-void	set_color(float x, float y, t_fdf *data);
+void	set_color(int z, t_fdf *data);
 void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data);
 void	draw_map(t_fdf *data);
 

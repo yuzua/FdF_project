@@ -20,40 +20,51 @@ void	x_breswnham(float *x, float *y, bool is_x_breswnham)
 		*y += 1;
 }
 
-void	set_color(float x, float y, t_fdf *data)
+void	set_color(int z, t_fdf *data)
 {
-	if (data->z_matrix[(int)y][(int)x])
+	if (z)
 		data->color = 0xe80c0c;
 	else
 		data->color = 0xffffff;
 }
 
-void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data)
+static void	draw_line(float x, float y, float x1, float y1, t_fdf *data)
 {
 	float	x_step;
 	float	y_step;
 	int		max_;
-	float	x1;
-	float	y1;
 
-	x1 = x;
-	y1 = y;
-	x_breswnham(&x1, &y1, is_x_breswnham);
-	zoom_coodinate(&x, &y, data->zoom);
-	zoom_coodinate(&x1, &y1, data->zoom);
-	set_color(x, y, data);
-	isometric(&x, &y, data->z_matrix[(int)y][(int)x]);
-	isometric(&x1, &y1, data->z_matrix[(int)y1][(int)x1]);
-	offset_coordinate(&x, &y, &x1, &y1);
 	max_ = max(mod((x1 - x)), mod((y1 - y)));
 	x_step = (x1 - x) / max_;
 	y_step = (y1 - y) / max_;
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, x, y, data->color);
+		mlx_pixel_put(data->mlx_ptr, data->win_ptr,
+			(int)x, (int)y, data->color);
 		x += x_step;
 		y += y_step;
 	}
+}
+
+void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data)
+{
+	float	x1;
+	float	y1;
+	int		z0;
+	int		z1;
+
+	x1 = x;
+	y1 = y;
+	x_breswnham(&x1, &y1, is_x_breswnham);
+	z0 = data->z_matrix[(int)y][(int)x];
+	z1 = data->z_matrix[(int)y1][(int)x1];
+	set_color(z0, data);
+	zoom_coodinate(&x, &y, data->zoom);
+	zoom_coodinate(&x1, &y1, data->zoom);
+	isometric(&x, &y, (float)z0);
+	isometric(&x1, &y1, (float)z1);
+	offset_coordinate(&x, &y, &x1, &y1);
+	draw_line(x, y, x1, y1, data);
 }
 
 void	draw_map(t_fdf *data)
