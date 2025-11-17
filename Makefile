@@ -11,16 +11,18 @@ OBJS		=	$(SRCS:.c=.o)
 
 # Compiler / Flags
 CC			=	cc
-CFLAGS		+=	-Wall -Wextra -Werror -I libft
+CFLAGS		+=	-Wall -Wextra -Werror -I libft -I $(MLX_DIR)
 
 # Libraries
-LIBX_FLAGS	=	-L. -lmlx_Linux -lXext -lX11
+MLX_DIR		?=	minilibx-linux
+MLX_LIB		=	$(MLX_DIR)/libmlx_Linux.a
+LIBX_FLAGS	=	-L$(MLX_DIR) -lmlx_Linux -lXext -lX11
 LIBFT_DIR	=	libft
 LIBFT		=	$(LIBFT_DIR)/libft.a
 LIBS		=	-L$(LIBFT_DIR) -lft $(LIBX_FLAGS) -lm
 
 # Rules
-all:		$(LIBFT) $(NAME)
+all:		$(LIBFT) $(MLX_LIB) $(NAME)
 
 $(NAME):	$(OBJS)
 			$(CC) $(OBJS) $(LIBS) -o $(NAME)
@@ -28,9 +30,13 @@ $(NAME):	$(OBJS)
 $(LIBFT):
 			$(MAKE) -C $(LIBFT_DIR)
 
+$(MLX_LIB):
+			$(MAKE) -C $(MLX_DIR)
+
 clean:
 			$(RM) $(OBJS)
 			$(MAKE) -C $(LIBFT_DIR) clean
+			$(MAKE) -C $(MLX_DIR) clean
 
 fclean:		clean
 			$(RM) $(NAME)
