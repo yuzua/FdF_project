@@ -28,6 +28,8 @@
 # define ERROR -1
 # define SUCCESS 0
 # define OPEN_ERROR -1
+# define WIN_W 1920
+# define WIN_H 1080
 # define LINUX_ESC_KEY 0xff1b
 # define MACOS_ESC_KEY 53
 # define WINDOWS_ESC_KEY 0x1B
@@ -43,6 +45,11 @@ typedef struct s_fdf
 
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*img_ptr;
+	char	*img_data;
+	int		bpp;
+	int		size_line;
+	int		endian;
 }	t_fdf;
 
 int		get_height(char *file_name);
@@ -61,11 +68,14 @@ void	offset_coordinate(float *x, float *y, float *x1, float *y1);
 float	mod(float a);
 float	max(float a, float b);
 void	advance_step(float *x, float *y, float x_step, float y_step);
+int		init_mlx_and_window(t_fdf *data);
+int		init_image(t_fdf *data);
 
 void	x_breswnham(float *x, float *y, bool is_x_breswnham);
 void	set_color(int z, t_fdf *data);
 void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data);
 void	draw_map(t_fdf *data);
+void	set_pixel(t_fdf *data, int x, int y, int color);
 
 int		close_key_handler(int keycode, t_fdf *data);
 int		close_handler(void *param);

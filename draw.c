@@ -31,8 +31,7 @@ static void	draw_line(float p0[2], float p1[2], t_fdf *data)
 	y_step = (p1[1] - p0[1]) / max_;
 	while ((int)(p0[0] - p1[0]) || (int)(p0[1] - p1[1]))
 	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr,
-			(int)p0[0], (int)p0[1], data->color);
+		set_pixel(data, (int)p0[0], (int)p0[1], data->color);
 		p0[0] += x_step;
 		p0[1] += y_step;
 	}
@@ -57,6 +56,18 @@ void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data)
 	isometric(&x1, &y1, (float)z1);
 	offset_coordinate(&x, &y, &x1, &y1);
 	draw_line((float [2]){x, y}, (float [2]){x1, y1}, data);
+}
+
+void	set_pixel(t_fdf *data, int x, int y, int color)
+{
+	char	*dst;
+	int		bytes_per_pixel;
+
+	if (x < 0 || y < 0 || x >= WIN_W || y >= WIN_H)
+		return ;
+	bytes_per_pixel = data->bpp / 8;
+	dst = data->img_data + (y * data->size_line + x * bytes_per_pixel);
+	*(unsigned int *)dst = (unsigned int)color;
 }
 
 void	draw_map(t_fdf *data)
