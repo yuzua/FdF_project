@@ -70,16 +70,16 @@ int	main(int argc, char **argv)
 	int		fd;
 
 	if (argc != 2)
-		return (0);
+		return (1);
 	fd = open(argv[1], O_RDONLY, 0);
 	if (fd == -1)
-		return (0);
+		return (1);
 	close(fd);
 	data = (t_fdf *)malloc(sizeof(t_fdf));
 	if (data == NULL)
-		return (0);
+		return (1);
 	if (set_data(data, argv[1]) == ERROR)
-		return (0);
+		return (1);
 	draw_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	mlx_hook(data->win_ptr, CLOSE_BUTTON, 0L, close_handler, data);

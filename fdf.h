@@ -62,8 +62,9 @@ int		set_matrix(char *file_name, t_fdf *data);
 void	free_matrix(t_fdf *data, int i);
 
 void	isometric(float *x, float *y, float z);
-void	zoom_coodinate(float *a, float *b, int zoom);
+void	zoom_coodinate(float *a, float *b, int *z, int zoom);
 void	offset_coordinate(float *x, float *y, float *x1, float *y1);
+void	center_coordinate(float *x, float *y, t_fdf *data);
 
 float	mod(float a);
 float	max(float a, float b);

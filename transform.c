@@ -25,14 +25,21 @@ void	isometric(float *x, float *y, float z)
 
 void	offset_coordinate(float *x, float *y, float *x1, float *y1)
 {
-	*x += 150;
-	*y += 150;
-	*x1 += 150;
-	*y1 += 150;
+	*x += WIN_W / 2;
+	*y += WIN_H / 2;
+	*x1 += WIN_W / 2;
+	*y1 += WIN_H / 2;
 }
 
-void	zoom_coodinate(float *a, float *b, int zoom)
+void	zoom_coodinate(float *a, float *b, int *z, int zoom)
 {
 	*a *= zoom;
 	*b *= zoom;
+	*z *= zoom;
+}
+
+void	center_coordinate(float *x, float *y, t_fdf *data)
+{
+	*x -= (float)data->width / 2.0f;
+	*y -= (float)data->height / 2.0f;
 }

@@ -50,8 +50,10 @@ void	breswnham(float x, float y, bool is_x_breswnham, t_fdf *data)
 	z0 = data->z_matrix[(int)y][(int)x];
 	z1 = data->z_matrix[(int)y1][(int)x1];
 	set_color(z0, data);
-	zoom_coodinate(&x, &y, data->zoom);
-	zoom_coodinate(&x1, &y1, data->zoom);
+	center_coordinate(&x, &y, data);
+	center_coordinate(&x1, &y1, data);
+	zoom_coodinate(&x, &y, &z0, data->zoom);
+	zoom_coodinate(&x1, &y1, &z1, data->zoom);
 	isometric(&x, &y, (float)z0);
 	isometric(&x1, &y1, (float)z1);
 	offset_coordinate(&x, &y, &x1, &y1);
